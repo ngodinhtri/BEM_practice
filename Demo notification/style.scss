@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&display=swap");
+// variables
+$success-color: #47d764;
+$info-color: #2f86eb;
+$warning-color: #ffc021;
+$title-color: #333;
+$message-color: #888;
+// mixins
+@mixin color-modifier($color: #000) {
+  color: $color;
+  border-color: $color;
+}
+// CSS
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.6rem;
+}
+body {
+  height: 100vh;
+  display: flex;
+  font-family: "Roboto Slab", serif;
+  background-color: #f8f9fa;
+}
+body > div {
+  margin: auto;
+  position: relative;
+}
+
+/* Buttons*/
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #fff;
+  padding: 6px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  min-width: 120px;
+  transition: opacity 0.2 ease-in-out;
+  will-change: opacity;
+  text-align: center;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  & + & {
+    margin-left: 16px;
+  }
+
+  //Modifier
+  &.-success {
+    background-color: $success-color;
+  }
+  &.-info {
+    background-color: $info-color;
+  }
+  &.-warning {
+    background-color: $warning-color;
+  }
+  &.-disable {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &.-size-s {
+    padding: 6px 24px;
+  }
+  &.-size-l {
+    padding: 12px 48px;
+    font-size: 1.6rem;
+  }
+  &.-size-xl {
+    padding: 18px 72px;
+  }
+}
+
+/* Toast message */
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 1;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 0;
+  border-left: 4px solid #000;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  min-width: 400px;
+  max-width: 450px;
+  transition: all linear 0.3s;
+  // Modifier
+  &.-success {
+    @include color-modifier($success-color);
+  }
+  &.-info {
+    @include color-modifier($info-color);
+  }
+  &.-warning {
+    @include color-modifier($warning-color);
+  }
+
+  & + & {
+    margin-top: 20px;
+  }
+
+  // Elements
+  &__icon {
+    font-size: 2.5rem;
+    margin: 0 20px;
+  }
+
+  &__body {
+    flex: 1;
+
+    &_title {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: $title-color;
+    }
+    &_message {
+      font-size: 1.4rem;
+      color: $message-color;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin: 0 20px;
+    color: rgba($color: #000000, $alpha: 0.2);
+  }
+}
+
+//Keyframe
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(calc(0));
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
